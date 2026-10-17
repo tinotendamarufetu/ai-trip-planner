@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndaNeni AI — Smart Travel Planner</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- Dynamic Animated Background -->
+    <div class="page-bg">
+        <div class="gradient-circle circle-1"></div>
+        <div class="gradient-circle circle-2"></div>
+        <div class="gradient-circle circle-3"></div>
+        <div class="bg-grid-overlay"></div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <span class="logo-icon"><i class="fa-solid fa-compass-drafting"></i></span>
+                <span class="logo-text">Enda<span>Neni</span></span>
+            </div>
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                <span>Multi-Agent Travelling System Active</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+
+        <!-- Hero Header -->
+        <section class="hero-section">
+            <div class="badge">
+                <i class="fa-solid fa-bolt"></i> Powered by LangGraph & Multi-Agent AI
+            </div>
+
+            <h1>Plan Your Next Journey <br><span class="highlight-text">With Intelligent AI</span></h1>
+
+            <p>
+                Search flights, discover curated hotels, and generate tailor-made itineraries in seconds using an autonomous multi-agent engine.
+            </p>
+        </section>
+
+        <!-- Planner Card / Input UI -->
+        <section class="planner-card">
+
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fa-solid fa-map-location-dot title-icon"></i>
+                    <div>
+                        <h2>Where do you want to explore?</h2>
+                        <p class="subtitle">Describe your destination, duration, budget, or preferred activities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <textarea
+                    id="userInput"
+                    placeholder="e.g., Plan a 7-day Japan trip from Bangladesh including flights, hotels, and sightseeing under 2 lakhs BDT..."
+                    rows="4"
+                ></textarea>
+
+                <div class="input-actions">
+                    <span class="input-hint"><i class="fa-solid fa-lightbulb"></i> Tip: Include your origin city and budget for accurate plans.</span>
+                    <button id="sendBtn" class="primary-btn" onclick="sendMessage()">
+                        <span id="btnText"><i class="fa-solid fa-paper-plane"></i> Generate Plan</span>
+                        <span id="btnLoader" class="loader hidden"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Prompts Pills -->
+            <div class="quick-prompts-container">
+                <span class="prompts-label">Quick Ideas:</span>
+                <div class="quick-prompts">
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 4-day boys trip to Las Vegas from Newark for 4 friends. Include affordable flights, a hotel near the Strip, pool parties, nightlife, great food, and a realistic budget per person.')">
+                        <span>🎰</span> Boys Gone Vegas
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a romantic 5-day couples getaway from New York to Cancun, Mexico. Include flights, an adults-only all-inclusive resort, beach activities, romantic dinners, nightlife, and the total cost for two.')">
+                        <span>❤️</span> Couples Escape
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 4-day family adventure from New Jersey to Orlando, Florida, for 2 adults and 2 kids. Include flights or driving options, family-friendly hotels, Disney World or Universal Studios, food costs, and a complete budget.')">
+                        <span>🏰</span> Kids Take Over Orlando
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 5-day solo reset trip from Newark to Miami, Florida. I want sunshine, beaches, good food, social activities, nightlife, and a nice but affordable hotel. Include flights and a full budget.')">
+                        <span>🌴</span> Main Character Reset
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 3-day road trip from Newark, New Jersey, to the Smoky Mountains in Tennessee for 3 friends. Include a scenic driving route, affordable cabins, hiking, waterfalls, barbecue spots, fuel costs, and a full itinerary.')">
+                        <span>🚙</span> Touch Grass Road Trip
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 4-day birthday trip from New York City to New Orleans for 5 friends. Include flights, a centrally located hotel, live music, famous food spots, nightlife, cultural attractions, and the cost per person.')">
+                        <span>🎂</span> Birthday Behavior
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 6-day budget-friendly trip from Newark to Los Angeles for 2 friends. Include flights, a hotel, Hollywood, Santa Monica, Venice Beach, famous food spots, transportation, and a realistic total budget.')">
+                        <span>🌴</span> LA on a Budget
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 3-day spontaneous fall weekend getaway from Newark for a couple. Find a charming small town with colorful autumn leaves, a cozy hotel or cabin, scenic drives, pumpkin patches, local restaurants, and estimated costs.')">
+                        <span>🍂</span> Fall Fling
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 7-day national parks road trip from Newark for 2 adults. Compare flying and renting a car versus driving our own car. Include the best parks for first-timers, scenic stops, affordable stays, park fees, fuel, and a day-by-day itinerary.')">
+                        <span>🏞️</span> America Bucket List
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 5-day friends trip from Newark to Puerto Rico for 4 people. Include flight options, affordable beachside accommodation, snorkeling, local food, nightlife, cultural experiences, transportation, and the budget per person.')">
+                        <span>🏖️</span> Passport Optional
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Plan a 2-night luxury weekend getaway from New York City for a couple celebrating an anniversary. Include a boutique hotel, spa experience, fine dining, scenic activities, transportation, and the total cost.')">
+                        <span>🥂</span> Soft Life Weekend
+                    </button>
+
+                    <button class="prompt-chip" onclick="setPrompt('Find flight options from Newark or JFK to popular international destinations for a trip next month. Compare prices, flight duration, layovers, baggage considerations, and estimated accommodation costs. Recommend the best-value destinations.')">
+                        <span>✈️</span> Get Me Outta Here
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Error Message Alert -->
+        <section id="errorBox" class="error-box hidden"></section>
+
+        <!-- Result Output Card -->
+        <section id="resultSection" class="result-section hidden">
+
+            <div class="result-header">
+                <div class="result-title-group">
+                    <h2><i class="fa-solid fa-route"></i> Your Custom Itinerary</h2>
+                    <p id="threadInfo" class="thread-info"><i class="fa-solid fa-hashtag"></i> Thread ID: -</p>
+                </div>
+
+                <div class="result-actions">
+                    <button class="action-btn copy-btn" onclick="copyResult()">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+
+                    <button class="action-btn download-btn" onclick="downloadPDF()">
+                        <i class="fa-solid fa-file-arrow-down"></i> Export PDF
+                    </button>
+                </div>
+            </div>
+
+            <div id="pdfContent" class="pdf-content">
+                <div class="pdf-header-print">
+                    <h1 class="pdf-title">EndaNeni Travel Plan</h1>
+                    <span class="pdf-subtitle">Generated by AI Multi-Agent Travel Graph</span>
+                </div>
+                <div id="resultBox" class="result-box markdown-body"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <p>Engineered with FastAPI • LangGraph • Groq • PostgreSQL • Tavily • AviationStack</p>
+            <p class="copyright">© 2026 EndaNeni AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- PDF Download Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Your Custom JS -->
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
