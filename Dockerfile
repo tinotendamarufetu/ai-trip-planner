@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 10000
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+# Use a shell command so it evaluates the $PORT variable provided by Render
+CMD sh -c "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"
