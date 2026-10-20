@@ -9,24 +9,27 @@
   --bg-card-border: rgba(255, 255, 255, 0.08);
   --bg-input: rgba(10, 14, 23, 0.6);
   --bg-input-focus: rgba(15, 22, 35, 0.9);
-  
+
   --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
   --primary-color: #6366f1;
   --primary-hover: #4f46e5;
   --accent-cyan: #06b6d4;
-  
+
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
-  
+
   --success-color: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.12);
+  --success-border: rgba(16, 185, 129, 0.3);
+
   --error-color: #ef4444;
   --error-bg: rgba(239, 68, 68, 0.1);
-  
+
   --border-radius-lg: 20px;
   --border-radius-md: 12px;
   --border-radius-sm: 8px;
-  
+
   --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
   --backdrop-blur: blur(16px);
@@ -229,6 +232,19 @@ body {
   margin: 0 auto;
 }
 
+/* --- Common UI Components --- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent-cyan);
+  margin-bottom: 0.25rem;
+}
+
 /* --- Planner Input Card --- */
 .planner-card {
   background: var(--bg-card);
@@ -406,9 +422,74 @@ textarea#userInput::placeholder {
   transform: translateY(-1px);
 }
 
+/* --- Workflow Section --- */
+.workflow-section {
+  margin-top: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-main);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.workflow-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.guardrail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: #34d399;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.supervisor-reasoning {
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.agent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.agent-chip {
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.825rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 /* --- Result Section --- */
 .result-section {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   background: var(--bg-card);
   border: 1px solid var(--bg-card-border);
   backdrop-filter: var(--backdrop-blur);
@@ -528,6 +609,116 @@ textarea#userInput::placeholder {
   color: #ffffff;
 }
 
+/* --- Human-in-the-Loop Approval Section --- */
+.approval-section {
+  margin-top: 2rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-main), 0 0 20px rgba(168, 85, 247, 0.15);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.approval-card-inner {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.approval-icon {
+  font-size: 1.5rem;
+  color: #c084fc;
+  background: rgba(168, 85, 247, 0.15);
+  padding: 0.85rem;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.approval-content {
+  flex: 1;
+}
+
+.approval-content h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+#approvalRequest {
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  margin-bottom: 1.25rem;
+}
+
+textarea.feedback-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  min-height: 85px;
+  outline: none;
+  transition: var(--transition);
+  margin-bottom: 1.25rem;
+}
+
+textarea.feedback-input:focus {
+  background: var(--bg-input-focus);
+  border-color: #a855f7;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+.approval-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.approve-btn, .revise-btn {
+  border: none;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--border-radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.approve-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.approve-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.revise-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--bg-card-border);
+  color: var(--text-main);
+}
+
+.revise-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
 /* --- PDF Print Styling Overlay --- */
 .pdf-header-print {
   display: none;
@@ -586,17 +777,22 @@ textarea#userInput::placeholder {
   .hero-section h1 {
     font-size: 2rem;
   }
-  
-  .planner-card, .result-section {
+
+  .planner-card, .result-section, .workflow-section, .approval-section {
     padding: 1.25rem;
   }
-  
-  .input-actions {
+
+  .approval-card-inner {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input-actions, .approval-actions {
     flex-direction: column;
     align-items: stretch;
   }
-  
-  .primary-btn {
+
+  .primary-btn, .approve-btn, .revise-btn {
     justify-content: center;
     width: 100%;
   }

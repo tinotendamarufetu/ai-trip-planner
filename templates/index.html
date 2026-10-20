@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EndaNeni AI — Smart Travel Planner</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -141,15 +141,27 @@
 
         </section>
 
+        <!-- Workflow Execution Section -->
+        <section id="workflowSection" class="workflow-section hidden">
+            <div class="workflow-header">
+                <div>
+                    <span class="eyebrow"><i class="fa-solid fa-robot"></i> Supervisor Agent</span>
+                    <h2>Execution Plan</h2>
+                </div>
+                <span id="guardrailBadge" class="guardrail-badge"><i class="fa-solid fa-shield-halved"></i> Guardrail passed</span>
+            </div>
+            <p id="supervisorReasoning" class="supervisor-reasoning"></p>
+            <div id="agentChips" class="agent-chips"></div>
+        </section>
+
         <!-- Error Message Alert -->
         <section id="errorBox" class="error-box hidden"></section>
 
         <!-- Result Output Card -->
         <section id="resultSection" class="result-section hidden">
-
             <div class="result-header">
                 <div class="result-title-group">
-                    <h2><i class="fa-solid fa-route"></i> Your Custom Itinerary</h2>
+                    <h2 id="resultTitle"><i class="fa-solid fa-route"></i> Your Custom Itinerary</h2>
                     <p id="threadInfo" class="thread-info"><i class="fa-solid fa-hashtag"></i> Thread ID: -</p>
                 </div>
 
@@ -171,7 +183,38 @@
                 </div>
                 <div id="resultBox" class="result-box markdown-body"></div>
             </div>
+        </section>
 
+        <!-- Human-in-the-Loop Approval Section -->
+        <section id="approvalSection" class="approval-section hidden">
+            <div class="approval-card-inner">
+                <div class="approval-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div class="approval-content">
+                    <span class="eyebrow"><i class="fa-solid fa-sliders"></i> Human-in-the-Loop</span>
+                    <h2>Review the draft itinerary</h2>
+                    <p id="approvalRequest">
+                        Approve the draft or provide feedback before the final plan is generated.
+                    </p>
+
+                    <textarea
+                        id="approvalFeedback"
+                        class="feedback-input"
+                        placeholder="Add revision feedback, for example: reduce the hotel cost and add one free day..."
+                        rows="3"
+                    ></textarea>
+
+                    <div class="approval-actions">
+                        <button id="approveBtn" class="approve-btn" onclick="submitApproval(true)">
+                            <i class="fa-solid fa-check-circle"></i> Approve & Generate Final
+                        </button>
+                        <button id="reviseBtn" class="revise-btn" onclick="submitApproval(false)">
+                            <i class="fa-solid fa-rotate-right"></i> Revise Using Feedback
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
